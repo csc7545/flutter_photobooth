@@ -17,11 +17,8 @@
 
 7. 만약 이 과정에서 오류가 발생하면, 오류를 콘솔에 출력합니다. 이는 catch 블록 내에서 print 함수를 호출하여 수행합니다.
 
-### 첫 화면
-![KakaoTalk_20240221_071920929](https://github.com/csc7545/flutter_photobooth/assets/74640695/90718f8c-1422-40d5-aa6d-190be45e61d2)
-
-### 사진 찍기
-![KakaoTalk_20240221_071920929_02](https://github.com/csc7545/flutter_photobooth/assets/74640695/1d38220a-e361-421a-a7aa-5d998905bd49)
-
-### 사진 보기
-![KakaoTalk_20240221_071920929_01](https://github.com/csc7545/flutter_photobooth/assets/74640695/260f3a84-9a3c-432d-aada-4ccd00d7bfb2)
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/csc7545/flutter_photobooth/assets/74640695/90718f8c-1422-40d5-aa6d-190be45e61d2" width="30%">
+  <img src="https://github.com/csc7545/flutter_photobooth/assets/74640695/1d38220a-e361-421a-a7aa-5d998905bd49" width="30%">
+  <img src="https://github.com/csc7545/flutter_photobooth/assets/74640695/260f3a84-9a3c-432d-aada-4ccd00d7bfb2" width="30%">
+</div>

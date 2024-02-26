@@ -14,11 +14,15 @@ class DisplayPicture extends StatelessWidget {
     image.evict();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.white,
+        title: const Text(
+          'SOUL LINK',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: const Text('Picture Result'),
       ),
       body: Center(
         child: Column(
@@ -27,8 +31,8 @@ class DisplayPicture extends StatelessWidget {
             Image(
               image: image,
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height * 0.7,
+              fit: BoxFit.contain,
             ),
             const SizedBox(height: 20),
             ElevatedButton(

@@ -11,9 +11,15 @@ class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Home"),
+        backgroundColor: Colors.white,
+        title: const Text(
+          'SOUL LINK',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: ElevatedButton(

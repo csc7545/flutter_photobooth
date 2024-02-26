@@ -44,7 +44,8 @@ class _CameraScreenState extends State<CameraScreen>
     }
     if (state == AppLifecycleState.inactive) {
       controller.dispose();
-    } else if (state == AppLifecycleState.resumed) {
+    }
+    if (state == AppLifecycleState.resumed) {
       if (controller != null) {
         initCamera();
       }
@@ -180,7 +181,7 @@ Widget buildButtons(GlobalKey<State<StatefulWidget>> _repaintKey,
           onPressed: () {},
         ),
         // 촬영 버튼
-        TakingPictureWidget(repaintKey: _repaintKey),
+        TakingPictureWidget(repaintKey: _repaintKey, controller: controller),
         // 전후면 화면 전환 버튼
         IconButton(
           icon: const Icon(Icons.switch_camera),

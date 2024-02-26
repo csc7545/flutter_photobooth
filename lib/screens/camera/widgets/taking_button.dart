@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,11 @@ class TakingPictureWidget extends StatelessWidget {
   const TakingPictureWidget({
     super.key,
     required GlobalKey<State<StatefulWidget>> repaintKey,
+    required this.controller,
   }) : _repaintKey = repaintKey;
 
   final GlobalKey<State<StatefulWidget>> _repaintKey;
+  final CameraController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,8 @@ class TakingPictureWidget extends StatelessWidget {
       icon: const Icon(Icons.camera),
       onPressed: () async {
         try {
+          // Dispose the camera controller
+          // controller.dispose();
           // Capture the Stack widget as an image
           RenderRepaintBoundary boundary = _repaintKey.currentContext!
               .findRenderObject() as RenderRepaintBoundary;

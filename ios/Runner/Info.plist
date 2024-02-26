@@ -47,10 +47,10 @@
 	<true/>
 	<!-- camera permission -->
 	<key>NSCameraUsageDescription</key>
-	<string>your usage description here</string>
+	<string>이 앱에서 카메라를 사용합니다</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>your usage description here</string>
+	<string>이 앱에서 마이크를 사용합니다</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>your usage description here</string>
+	<string>이 앱에서 갤러리를 사용합니다</string>
 </dict>
 </plist>

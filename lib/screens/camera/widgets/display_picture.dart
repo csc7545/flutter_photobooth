@@ -9,8 +9,9 @@ class DisplayPicture extends StatelessWidget {
   final String imagePath;
 
   Future<void> saveImageToGallery(String imagePath) async {
-    final Uint8List bytes = await File(imagePath).readAsBytes();
-    final result = await ImageGallerySaver.saveImage(bytes);
+    // final Uint8List bytes = await File(imagePath).readAsBytes();
+    // final result = await ImageGallerySaver.saveImage(bytes);
+    final result = await ImageGallerySaver.saveFile(imagePath);
 
     print('Image saved to gallery: $result');
   }

@@ -29,7 +29,7 @@ class TakingPictureWidget extends StatelessWidget {
           // Capture the Stack widget as an image
           RenderRepaintBoundary boundary = _repaintKey.currentContext!
               .findRenderObject() as RenderRepaintBoundary;
-          ui.Image image = await boundary.toImage();
+          ui.Image image = await boundary.toImage(pixelRatio: 3.0);
           ByteData? byteData =
               await image.toByteData(format: ui.ImageByteFormat.png);
           Uint8List pngBytes = byteData!.buffer.asUint8List();

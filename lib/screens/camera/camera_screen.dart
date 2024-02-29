@@ -128,7 +128,6 @@ class _CameraScreenState extends State<CameraScreen>
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: <Widget>[
@@ -143,22 +142,31 @@ class _CameraScreenState extends State<CameraScreen>
 // 카메라 화면
 Widget buildCameraSection(GlobalKey<State<StatefulWidget>> _repaintKey,
     BuildContext context, CameraController controller) {
+  final double aspectRatio = controller.value.aspectRatio;
+  const double previewAspectRatio = 0.63;
+
   return Expanded(
     child: Center(
       child: RepaintBoundary(
         key: _repaintKey,
         child: Stack(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: CameraPreview(controller),
+            AspectRatio(
+              aspectRatio: 39 / 62,
+              child: ClipRect(
+                child: Transform.scale(
+                  scale: aspectRatio * previewAspectRatio,
+                  child: Center(
+                    child: CameraPreview(controller),
+                  ),
+                ),
+              ),
             ),
             Positioned(
               bottom: 0,
               right: 10,
               child: Image.asset('assets/images/sample2.png',
-                  width: 180, height: MediaQuery.of(context).size.height / 2.5),
+                  height: MediaQuery.of(context).size.height / 2.5),
             ),
           ],
         ),
@@ -171,22 +179,27 @@ Widget buildCameraSection(GlobalKey<State<StatefulWidget>> _repaintKey,
 Widget buildButtons(GlobalKey<State<StatefulWidget>> _repaintKey,
     CameraController controller, switchCamera) {
   return Container(
-    padding: const EdgeInsets.all(10.0),
+    padding: const EdgeInsets.fromLTRB(0, 15, 0, 25),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        // 사진첩 버튼
-        IconButton(
-          icon: const Icon(Icons.photo_library),
-          onPressed: () {},
-        ),
+        Flexible(flex: 1, child: Container()),
         // 촬영 버튼
-        TakingPictureWidget(repaintKey: _repaintKey, controller: controller),
+        Flexible(
+            flex: 6,
+            child: TakingPictureWidget(
+                repaintKey: _repaintKey, controller: controller)),
         // 전후면 화면 전환 버튼
-        IconButton(
-          icon: const Icon(Icons.switch_camera),
-          onPressed: switchCamera,
-        ),
+        Flexible(
+          flex: 1,
+          child: IconTheme(
+            data: const IconThemeData(size: 32),
+            child: IconButton(
+              icon: const Icon(Icons.repeat),
+              onPressed: switchCamera,
+            ),
+          ),
+        )
       ],
     ),
   );

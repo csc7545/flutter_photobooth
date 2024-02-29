@@ -28,46 +28,72 @@ class DisplayPicture extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
-          'SOUL LINK',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+          '사진 확인',
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(
-              image: image,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.7,
-              fit: BoxFit.contain,
+            Expanded(
+              child: Image(
+                image: image,
+                fit: BoxFit.cover,
+              ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Take again'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    saveImageToGallery(imagePath);
-                  },
-                  child: const Text('Save Photo'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Share Photo'),
-                ),
-              ],
-            ),
+            buildButtons(context),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildButtons(context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Flexible(flex: 1, child: Container()),
+          Flexible(
+            flex: 6,
+            child: ClipOval(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    saveImageToGallery(imagePath);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.width * 0.2,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.download_rounded,
+                      size: 40,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: IconTheme(
+              data: const IconThemeData(size: 32),
+              child: IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () {},
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

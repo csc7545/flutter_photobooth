@@ -20,41 +20,53 @@ class TakingPictureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.camera),
-      onPressed: () async {
-        try {
-          // Dispose the camera controller
-          // controller.dispose();
-          // Capture the Stack widget as an image
-          RenderRepaintBoundary boundary = _repaintKey.currentContext!
-              .findRenderObject() as RenderRepaintBoundary;
-          ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-          ByteData? byteData =
-              await image.toByteData(format: ui.ImageByteFormat.png);
-          Uint8List pngBytes = byteData!.buffer.asUint8List();
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () async {
+            try {
+              // Dispose the camera controller
+              // controller.dispose();
+              // Capture the Stack widget as an image
+              RenderRepaintBoundary boundary = _repaintKey.currentContext!
+                  .findRenderObject() as RenderRepaintBoundary;
+              ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+              ByteData? byteData =
+                  await image.toByteData(format: ui.ImageByteFormat.png);
+              Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-          // Get the temporary directory of the app
-          Directory tempDir = await getTemporaryDirectory();
+              // Get the temporary directory of the app
+              Directory tempDir = await getTemporaryDirectory();
 
-          // Create a file in the temporary directory
-          File imgFile = File('${tempDir.path}/image.png');
+              // Create a file in the temporary directory
+              File imgFile = File('${tempDir.path}/image.png');
 
-          // Write the image bytes to the file
-          await imgFile.writeAsBytes(pngBytes);
+              // Write the image bytes to the file
+              await imgFile.writeAsBytes(pngBytes);
 
-          // Navigate to the DisplayPicture screen and pass the imagePath.
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DisplayPicture(imagePath: imgFile.path),
+              // Navigate to the DisplayPicture screen and pass the imagePath.
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DisplayPicture(imagePath: imgFile.path),
+                ),
+              );
+            } catch (e) {
+              // If an error occurs, log the error to the console.
+              print(e);
+            }
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.2,
+            height: MediaQuery.of(context).size.width * 0.2,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xff9F5BF4), width: 4),
+              shape: BoxShape.circle,
             ),
-          );
-        } catch (e) {
-          // If an error occurs, log the error to the console.
-          print(e);
-        }
-      },
+          ),
+        ),
+      ),
     );
   }
 }

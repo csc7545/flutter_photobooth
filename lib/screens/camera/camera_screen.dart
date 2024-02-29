@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:loop_page_view/loop_page_view.dart';
 import 'widgets/taking_button.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -162,11 +163,20 @@ Widget buildCameraSection(GlobalKey<State<StatefulWidget>> _repaintKey,
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              right: 10,
-              child: Image.asset('assets/images/sample2.png',
-                  height: MediaQuery.of(context).size.height / 2.5),
+            LoopPageView.builder(
+              itemCount: 3,
+              itemBuilder: (_, index) {
+                return Stack(
+                  children: [
+                    Positioned(
+                      bottom: 5,
+                      right: 10,
+                      child: Image.asset('assets/images/sample2.png',
+                          height: MediaQuery.of(context).size.height / 2.5),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),

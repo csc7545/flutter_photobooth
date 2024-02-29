@@ -37,6 +37,7 @@ dependencies:
   camera: ^0.10.5+9
   path_provider: ^2.1.2
   image_gallery_saver: ^2.0.3
+  loop_page_view: ^1.2.5
 
 dev_dependencies:
   flutter_test:

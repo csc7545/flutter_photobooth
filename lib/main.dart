@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'screens/camera/camera_screen.dart';
-import 'screens/camera/widgets/display_picture.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

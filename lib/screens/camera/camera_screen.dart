@@ -57,7 +57,9 @@ class _CameraScreenState extends State<CameraScreen>
   // 카메라 초기화
   Future<void> initCamera() async {
     cameras = await availableCameras();
-    controller = CameraController(cameras[1], ResolutionPreset.max);
+    final description =
+        cameras.firstWhere((element) => element.lensDirection == direction);
+    controller = CameraController(description, ResolutionPreset.max);
     controller.initialize().then((_) {
       if (!mounted) {
         return;

@@ -40,11 +40,13 @@ class _CameraScreenState extends State<CameraScreen>
   // 생명주기 변경 시
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("didChangeAppLifecycleState: $state");
     super.didChangeAppLifecycleState(state);
     if (controller == null || !controller.value.isInitialized) {
       return;
     }
-    if (state == AppLifecycleState.inactive) {
+
+    if (state == AppLifecycleState.paused) {
       controller.dispose();
     }
     if (state == AppLifecycleState.resumed) {

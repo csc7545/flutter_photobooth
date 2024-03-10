@@ -113,7 +113,9 @@ class _CameraScreenState extends State<CameraScreen>
   @override
   Widget build(BuildContext context) {
     // 카메라 초기화 중이면 로딩 화면 표시
-    if (!isInitialized) {
+    if (!isInitialized ||
+        controller == null ||
+        !controller.value.isInitialized) {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

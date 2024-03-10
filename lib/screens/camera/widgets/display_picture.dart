@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'dart:typed_data';
+import 'package:flutter_application_1/utilities/share_sns.dart';
 
 class DisplayPicture extends StatelessWidget {
   const DisplayPicture({Key? key, required this.imagePath}) : super(key: key);
@@ -89,7 +89,9 @@ class DisplayPicture extends StatelessWidget {
               data: const IconThemeData(size: 32),
               child: IconButton(
                 icon: const Icon(Icons.share),
-                onPressed: () {},
+                onPressed: () {
+                  shareImage(imagePath);
+                },
               ),
             ),
           )

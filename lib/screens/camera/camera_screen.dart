@@ -19,6 +19,7 @@ class _CameraScreenState extends State<CameraScreen>
   late List<CameraDescription> cameras;
   bool isInitialized = false;
   int selectedCameraIndex = 1; // 전면 카메라를 기본으로 선택
+  CameraLensDirection direction = CameraLensDirection.front;
 
   // 초기화
   @override
@@ -82,10 +83,16 @@ class _CameraScreenState extends State<CameraScreen>
 
   // 전후면 카메라 전환
   void switchCamera() {
-    selectedCameraIndex =
-        selectedCameraIndex < cameras.length - 1 ? selectedCameraIndex + 1 : 0;
+    if (direction == CameraLensDirection.front) {
+      direction = CameraLensDirection.back;
+    } else {
+      direction = CameraLensDirection.front;
+    }
+
+    final cd =
+        cameras.firstWhere((element) => element.lensDirection == direction);
     CameraController newController = CameraController(
-      cameras[selectedCameraIndex],
+      cd,
       ResolutionPreset.max,
     );
 
@@ -146,40 +153,36 @@ Widget buildCameraSection(GlobalKey<State<StatefulWidget>> _repaintKey,
   final double aspectRatio = controller.value.aspectRatio;
   const double previewAspectRatio = 0.63;
 
-  return Expanded(
-    child: Center(
-      child: RepaintBoundary(
-        key: _repaintKey,
-        child: Stack(
-          children: [
-            AspectRatio(
-              aspectRatio: 39 / 62,
-              child: ClipRect(
-                child: Transform.scale(
-                  scale: aspectRatio * previewAspectRatio,
-                  child: Center(
-                    child: CameraPreview(controller),
-                  ),
-                ),
+  return AspectRatio(
+    aspectRatio: 39 / 62,
+    child: RepaintBoundary(
+      key: _repaintKey,
+      child: Stack(
+        children: [
+          ClipRect(
+            child: Transform.scale(
+              scale: aspectRatio * previewAspectRatio,
+              child: Center(
+                child: CameraPreview(controller),
               ),
             ),
-            LoopPageView.builder(
-              itemCount: 3,
-              itemBuilder: (_, index) {
-                return Stack(
-                  children: [
-                    Positioned(
-                      bottom: 5,
-                      right: 10,
-                      child: Image.asset('assets/images/sample2.png',
-                          height: MediaQuery.of(context).size.height / 2.5),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+          LoopPageView.builder(
+            itemCount: 3,
+            itemBuilder: (_, index) {
+              return Stack(
+                children: [
+                  Positioned(
+                    bottom: 5,
+                    right: 10,
+                    child: Image.asset('assets/images/sample2.png',
+                        height: MediaQuery.of(context).size.height / 2.5),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
       ),
     ),
   );

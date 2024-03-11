@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'screens/camera/camera_screen.dart';
+import 'utilities/uni_link.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  initUniLinks();
   runApp(const MyApp());
 }
 

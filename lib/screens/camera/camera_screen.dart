@@ -181,7 +181,7 @@ Widget buildCameraSection(GlobalKey<State<StatefulWidget>> _repaintKey,
                   Positioned(
                     bottom: 0,
                     right: 10,
-                    child: Image.asset('assets/images/sample2.png',
+                    child: Image.asset('assets/images/sample${index + 1}.png',
                         height: MediaQuery.of(context).size.height / 2.5),
                   ),
                 ],

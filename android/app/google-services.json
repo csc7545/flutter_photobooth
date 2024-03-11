@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "285505077714",
+    "project_id": "flutter-photobooth",
+    "storage_bucket": "flutter-photobooth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285505077714:android:440ef045d9e8e87e1ec80b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9v0y9HV9F0XsCg4oS7lh6y2DcimR-4XI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

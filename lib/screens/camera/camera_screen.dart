@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_application_1/providers/dynamic_link.dart';
 import 'package:loop_page_view/loop_page_view.dart';
+import 'package:provider/provider.dart';
 import 'widgets/taking_button.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -112,6 +114,7 @@ class _CameraScreenState extends State<CameraScreen>
 
   @override
   Widget build(BuildContext context) {
+    print('camera: ${context.hashCode}');
     // 카메라 초기화 중이면 로딩 화면 표시
     if (!isInitialized ||
         controller == null ||
@@ -173,18 +176,24 @@ Widget buildCameraSection(GlobalKey<State<StatefulWidget>> _repaintKey,
               ),
             ),
           ),
-          LoopPageView.builder(
-            itemCount: 3,
-            itemBuilder: (_, index) {
-              return Stack(
-                children: [
-                  Positioned(
-                    bottom: 0,
-                    right: 10,
-                    child: Image.asset('assets/images/sample${index + 1}.png',
-                        height: MediaQuery.of(context).size.height / 2.5),
-                  ),
-                ],
+          Consumer<DynamicLink>(
+            builder: (context, dynamicLink, child) {
+              return LoopPageView.builder(
+                itemCount: 3,
+                itemBuilder: (_, index) {
+                  String imageId =
+                      index == 0 ? dynamicLink.id ?? '1' : index.toString();
+                  return Stack(
+                    children: [
+                      Positioned(
+                        bottom: 0,
+                        right: 10,
+                        child: Image.asset('assets/images/sample$imageId.png',
+                            height: MediaQuery.of(context).size.height / 2.5),
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
